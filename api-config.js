@@ -13,6 +13,10 @@ export default [
         {
           path: '/loading',
           title: 'Loading 加载',
+        },
+        {
+          path: '/showToast',
+          title: 'ShowToast 轻提示',
         }
       ]
     }

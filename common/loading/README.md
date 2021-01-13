@@ -2,7 +2,7 @@
 
 ### 使用
 
-引入并在小程序`app`挂载`webp_wcyui`库后，可使用`app.whcy.showLoading`,`app.whcy.hideLoading`进行加载，微信默认的wx.loading如果忘记进行关闭会造成问题，这里采用全局变量进行管理，配合使用`app.whcy.hideLoading`保证加载框能在任何需要的时候进行自动关闭。
+引入并在小程序`app`挂载`webp_wcyui`库后，可使用`app.whcy.showLoading`,`app.whcy.hideLoading`进行加载，微信默认的wx.loading如果忘记进行关闭会造成问题，这里采用全局变量进行管理，配合使用`app.whcy.showToast`保证加载框能在任何需要的时候进行自动关闭。
 <img style="width: 600px;" src="https://raw.githubusercontent.com/MGYYM/webp_wcyui/master/docs/static/image/loding-tip.png" />
 
 ## 代码演示

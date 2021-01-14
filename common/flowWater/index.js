@@ -28,6 +28,12 @@ WcyComponent({
       type: Array,
       value:[],
       observer: function(newVal, oldVal) {
+        if(newVal.length==0){
+          this.setData({
+            linkDatas:[]
+          })
+          return
+        }
         if(newVal.length>oldVal.length&&Object.prototype.toString.call(newVal)=="[object Array]"){
           //属性值变化时执行
           this.initListParmer();
@@ -88,7 +94,6 @@ WcyComponent({
           //  styleStr += `--item-span-${sii}: auto / span ${span};`
           let curItem = this.data.linkDatas.filter(e => e[this.data.key] == id);
           if (curItem[0]["gridstyle"]) return;
-          debugger
           curItem[0]["gridstyle"] = `grid-row:auto / span ${span};`
           this.data.loadFinishNum = this.data.loadFinishNum +1;
           if(this.data.loadFinishNum == this.data.attachedNum){

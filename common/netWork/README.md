@@ -2,14 +2,14 @@
 
 ### 使用
 
-引入并在小程序`app`挂载`webp_wcyui`库后，可使用`app.whcy.request`进行网络请求
+引入并在小程序`app`挂载`webp_wcyui`库后，可使用`wx.whcy.request`进行网络请求
 
 ## 代码演示
 
 ### 默认请求
 默认为`get`请求，支持`wx.request`的全部请求类型，和全部请求参数,点击查看 [wx.request](https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html)
 ```
-  app.whcy.request({
+  wx.whcy.request({
     url:"https://www.zhangxinxu.com/php/_ajax-support.php",
   }).then((res)=>{
     console.log(res);
@@ -22,7 +22,7 @@
 支持添加`needLoading`参数，来添加小程序loading图标
 
 ```
-  app.whcy.request({
+  wx.whcy.request({
     url:"https://www.zhangxinxu.com/php/_ajax-support.php",
     needLoading:true
   }).then((res)=>{
@@ -36,7 +36,7 @@
 支持添加`needLog`参数，来记录请求时的日志到小程序后台管理系统，集成了微信的实时日志功能，点击查看 [实时日志](https://developers.weixin.qq.com/miniprogram/dev/framework/realtimelog/)
 
 ```
-  app.whcy.request({
+  wx.whcy.request({
     url:"https://www.zhangxinxu.com/php/_ajax-support.php",
     needLog:true
   }).then((res)=>{

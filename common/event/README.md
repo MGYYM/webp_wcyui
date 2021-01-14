@@ -2,13 +2,13 @@
 
 ### 使用
 
-引入并在小程序`app`挂载`webp_wcyui`库后，可使用`app.whcy.$on`进行全局消息订阅，`app.whcy.$emit`进行全局消息广播，`app.whcy.$remove`进行取消订阅,消息订阅最好放在`onLoad`生命周期函数里
+引入并在小程序`app`挂载`webp_wcyui`库后，可使用`wx.whcy.$on`进行全局消息订阅，`wx.whcy.$emit`进行全局消息广播，`wx.whcy.$remove`进行取消订阅,消息订阅最好放在`onLoad`生命周期函数里
 
 ## 代码演示
 
 ### 消息订阅
 ```
-    app.whcy.$on({
+    wx.whcy.$on({
       name:"delete-address",
       tg:this,
       success:(res)=>{
@@ -22,7 +22,7 @@
 ### 消息广播
 
 ```
-  app.whcy.$emit({
+  wx.whcy.$emit({
      name: "delete-address",
      data: chooseAddress
   });
@@ -33,7 +33,7 @@
 ### 取消订阅
 
 ```
-  app.whcy.$remove({
+  wx.whcy.$remove({
      name: "delete-address",
      tg:this
   });

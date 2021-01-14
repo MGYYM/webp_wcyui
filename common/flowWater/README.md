@@ -75,21 +75,27 @@ OK，l-demo组件封装好以后，接下来就可以渲染瀑布流了。
 
 在使用瀑布流组件页面的json文件中同时引入water-flow和封装好的l-demo组件。
 ```html
-  <flowWater class="goods-compont" bind:updatedata="updatedata" datas="{{goods}}" pageNum="{{pageNum}}" pageSize="{{pageSize}}" showLoading="{{!updateView}}" attachedNum="{{attachedNum}}" generic:itemcus="l-demo">
-  </flowWater>
+  <flow-water style="--padding: 10rpx;width:100%" key="goodsSpuId" class="goods-compont" datas="{{goods}}" showLoading="{{goodsLoading}}" generic:itemcus="l-demo">
+  </flow-water>
 ```
+> 注意使用可以使用style规定item间距默认间距10rpx，width必须设为100%
 ## API
 
-### showLoading Props
+### Props
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| - | 参数和`wx.showLoading`一致，点击[查看](https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.showLoading.html) | - | - | - |
+| key |item的唯一键| string | - | - |
+| datas |瀑布流数据| array | [] | - |
+| showLoading |加载loading标识| boolean | - | - |
 
-### hideLoading Props
+### Events
 
-| 参数 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| - | 参数和`wx.hideLoading`一致，点击[查看](https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.hideLoading.html) | - | - | - |
+| 事件名 | 说明 | 参数 |
+| --- | --- | --- |
+| key |item的唯一键| string |
+| datas |瀑布流数据| array |
+| showLoading |加载loading标识|
+
 
 

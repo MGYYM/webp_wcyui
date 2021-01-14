@@ -1,8 +1,8 @@
 <view class="d-flex j-center flex-wrap">
     <view class="list2-box waterfall pb-2" style="{{waterStyle}}">
-        <block wx:for="{{datas}}" wx:key="{{item.goodsSpuId}}">
-            <itemcus style="{{item.gridstyle?item.gridstyle:'position:absolute;z-index:-1;visibility: hidden;width: calc((100% - var(--padding))/2)'}}" class="list2" id="{{'itemcus'+index}}" item="{{item}}" index="{{index}}" bind:loadthis="loadthis"></itemcus>
+        <block wx:for="{{linkDatas}}" wx:key="{{item[key]}}">
+            <itemcus wx:key="{{item[key]}}" style="{{item.gridstyle?item.gridstyle:'position:absolute;z-index:-1;visibility: hidden;width: calc((100% - var(--padding))/2)'}}" class="list2" id="{{'itemcus'+index}}" item="{{item}}" index="{{index}}" bind:loadthis="loadthis"></itemcus>
         </block>
     </view>
-    <view hidden="{{!showLoading}}"><van-loading color="red" /></view>
+    <view hidden="{{!showLoading}}" class="flow-loading"><van-loading color="red" /></view>
 </view>

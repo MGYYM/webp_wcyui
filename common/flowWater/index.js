@@ -26,17 +26,26 @@ WcyComponent({
   properties: {
     datas: {
       type: Array,
+      value:[],
       observer: function(newVal, oldVal) {
-        if(newVal.length>oldVal.length){
+        if(newVal.length>oldVal.length&&Object.prototype.toString.call(newVal)=="[object Array]"){
           //属性值变化时执行
           this.initListParmer();
-          this.data.attachedNum = newVal.length - oldVal.length;
+          let oldLen = this.data.linkDatas.length;
+          this.data.attachedNum = newVal.length - oldLen;
+          this.data.linkDatas.push(...newVal.splice(oldLen,newVal.length));
+          this.setData({
+            linkDatas:this.data.linkDatas
+          })
         }
       }
     },
     showLoading:{
       type:Boolean,
       value:false
+    },
+    key:{
+      type:String
     }
   },
 
@@ -44,6 +53,7 @@ WcyComponent({
    * 组件的初始数据
    */
   data: {
+    linkDatas:[],
     attachedNum:0,
     loadFinishNum:0,//一次load事件完成的数目
     loadingMoreHidden: true,
@@ -61,10 +71,10 @@ WcyComponent({
    */
   methods: {
     updateView(){//更新视图事件
-      let newArray = [...this.data.datas];
+      let newArray = [...this.data.linkDatas];
       this.triggerEvent("updatedata",newArray);
       this.setData({
-        datas: newArray
+        linkDatas: newArray
       });
     },
     refreshItem(index,_this){
@@ -76,8 +86,9 @@ WcyComponent({
           let height = ele.height
           let span = Math.ceil(height / 10)  // 20 = grid-auto-row
           //  styleStr += `--item-span-${sii}: auto / span ${span};`
-          let curItem = this.data.datas.filter(e => e.goodsSpuId == id);
+          let curItem = this.data.linkDatas.filter(e => e[this.data.key] == id);
           if (curItem[0]["gridstyle"]) return;
+          debugger
           curItem[0]["gridstyle"] = `grid-row:auto / span ${span};`
           this.data.loadFinishNum = this.data.loadFinishNum +1;
           if(this.data.loadFinishNum == this.data.attachedNum){
@@ -94,7 +105,7 @@ WcyComponent({
       this.refreshItem(index,_this);
     },
     initListParmer(){//初始一次ajax事件
-      //this.data.attachedNum = 0;//初始化数目
+      this.data.attachedNum = 0;//初始化数目
       this.data.loadFinishNum = 0;//加载完成的数目
     }
   }

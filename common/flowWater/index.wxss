@@ -13,3 +13,7 @@
   width     : 100%;
   background: white;
 }
+.flow-loading{
+  margin: 10px auto;
+  text-align: center;
+}

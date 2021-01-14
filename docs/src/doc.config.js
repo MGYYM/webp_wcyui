@@ -12,15 +12,13 @@ export const versions = [version];
 export default {
   header: {
     logo: {
-      image: 'https://img.yzcdn.cn/vant/logo.png',
       title: 'Wcyui Weapp',
       href: '#/',
     },
     nav: {
       logoLink: [
         {
-          image: 'https://img.yzcdn.cn/vant/vant-o.svg',
-          url: '/vant',
+          url: '/',
         }
       ],
     },

@@ -1,4 +1,7 @@
-let event = {};
+interface eventType {
+  [propName: string]: any;
+}
+let appwcy_event:eventType = {};
 
 const $on = function(params) {
   if (!params) {
@@ -16,11 +19,14 @@ const $on = function(params) {
     console.error("事件监听未设置目标对象   属性key=tg");
     return false;
   }
-  if (event[params.name]) {
-    var list = event[params.name];
+  // @ts-ignore
+  if (appwcy_event[params.name]) {
+    // @ts-ignore
+    var list = appwcy_event[params.name];
     list.push([params.tg, params.success]);
   } else {
-    event[params.name] = [
+    // @ts-ignore
+    appwcy_event[params.name] = [
       [params.tg, params.success]
     ];
   }
@@ -35,8 +41,10 @@ const $emit = function(params) {
     console.error("事件发送未设置名称 属性key=name");
     return false;
   }
-  if (event[params.name]) {
-    var list = event[params.name];
+  // @ts-ignore
+  if (appwcy_event[params.name]) {
+    // @ts-ignore
+    var list = appwcy_event[params.name];
     list.forEach(item => {
       item[1].call(item[0], params.data);
     })
@@ -52,13 +60,16 @@ const $remove = function(params) {
     return false;
   }
 
-  if (params.name && event[params.name]) {
-    event[params.name] = event[params.name].filter(a => {
+  // @ts-ignore
+  if (params.name && appwcy_event[params.name]) {
+    // @ts-ignore
+    appwcy_event[params.name] = appwcy_event[params.name].filter(a => {
       return a[0] != params.tg;
     })
   } else {
-    for (let key in event) {
-      event[key] = event[key].filter(a => {
+    for (let key in appwcy_event) {
+      // @ts-ignore
+      appwcy_event[key] = appwcy_event[key].filter(a => {
         return a[0] != params.tg;
       })
     }

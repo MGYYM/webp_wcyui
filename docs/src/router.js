@@ -17,7 +17,7 @@ const registerRoute = () => {
         const component = () =>
           page.md
             ? import(`../markdown/${path}.md`)
-            : import(`../../common/${path}/README.md`);
+            : (page.api?import(`../../packages/common/${path}/README.md`):import(`../../packages/${path}/README.md`));
   
         if (!component) {
           return;

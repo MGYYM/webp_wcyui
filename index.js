@@ -2,7 +2,7 @@
 import NetWork from './common/netWork/index'
 import appConfig from './common/appConfig/index'
 import { $on, $emit, $remove } from './common/event/index'
-import Base from 'base'
+import Base from 'packages/common/base'
 class Whcy extends Base {
     constructor(baseUrl, app) {
         console.log(app);

@@ -1,29 +1,9 @@
-Object.defineProperty(exports, '__esModule', { value: true });
-//注意curPage和pageNum的区分
-function WcyComponent(vantOptions = {}) {
-  const options = {};
-  Object.assign(options,vantOptions)
-  options.externalClasses = options.externalClasses || [];
-  options.externalClasses.push('custom-class');
-  options.behaviors = options.behaviors || [];
-  if (options.properties) {
-    Object.keys(options.properties).forEach((name) => {
-      if (Array.isArray(options.properties[name])) {
-        // miniprogram do not allow multi type
-        options.properties[name] = null;
-      }
-    });
-  }
-  Component(options);
-}
+import { WcyComponent } from '../common/component';
 WcyComponent({
-  options: {
-    styleIsolation: 'apply-shared'
-  },
   /**
    * 组件的属性列表
    */
-  properties: {
+  props: {
     datas: {
       type: Array,
       value:[],
@@ -39,6 +19,7 @@ WcyComponent({
           this.initListParmer();
           let oldLen = this.data.linkDatas.length;
           this.data.attachedNum = newVal.length - oldLen;
+          // @ts-ignore
           this.data.linkDatas.push(...newVal.splice(oldLen,newVal.length));
           this.setData({
             linkDatas:this.data.linkDatas
@@ -65,19 +46,18 @@ WcyComponent({
     loadingMoreHidden: true,
     shouldInit:true
   },
-  lifetimes: {
-    attached: function () {
-    },
-    detached: function () {
-      // 在组件实例被从页面节点树移除时执行
-    }
+  created: function () {
+  },
+  destroyed: function () {
+    // 在组件实例被从页面节点树移除时执行
   },
   /**
-   * 组件的方法列表 
+   * 组件的方法列表
    */
   methods: {
     updateView(){//更新视图事件
       let newArray = [...this.data.linkDatas];
+      // @ts-ignore
       this.triggerEvent("updatedata",newArray);
       this.setData({
         linkDatas: newArray
@@ -87,6 +67,7 @@ WcyComponent({
       let query = wx.createSelectorQuery().in(_this);
      // console.log(this.selectComponent(itemcus));
       query.selectAll(`.item-${index}`).boundingClientRect(ret => {
+        // @ts-ignore
         ret.forEach((ele, ii) => {
           let id = ele.dataset.item;
           let height = ele.height
@@ -94,6 +75,7 @@ WcyComponent({
           //  styleStr += `--item-span-${sii}: auto / span ${span};`
           let curItem = this.data.linkDatas.filter(e => e[this.data.key] == id);
           if (curItem[0]["gridstyle"]) return;
+          // @ts-ignore
           curItem[0]["gridstyle"] = `grid-row:auto / span ${span};`
           this.data.loadFinishNum = this.data.loadFinishNum +1;
           if(this.data.loadFinishNum == this.data.attachedNum){

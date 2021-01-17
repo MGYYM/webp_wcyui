@@ -8,6 +8,10 @@
     "bulid:lib": "yarn && npx gulp -f build/compiler.js --series buildEs buildLib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "dist",
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MGYYM/webp_wcyui.git"

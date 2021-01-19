@@ -47,5 +47,5 @@ class NetWork extends Base{
             });
         });
     }
-} 
+}
 export default NetWork;

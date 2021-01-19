@@ -4,9 +4,10 @@ const less = require('gulp-less');
 const insert = require('gulp-insert');
 const rename = require('gulp-rename');
 const postcss = require('gulp-postcss');
+const gulpif = require('gulp-if');
 const util = require('util');
 const src = path.resolve(__dirname, '../packages');
-const baseCssPath = path.resolve(__dirname, '../packages/common/index.wxss');
+const baseCssPath = path.resolve(__dirname, '../packages/common/ui.wxss');
 const libDir = path.resolve(__dirname, '../lib');
 const esDir = path.resolve(__dirname, '../dist');
 const exec = util.promisify(require('child_process').exec);
@@ -15,8 +16,13 @@ const esConfig = path.resolve(__dirname, '../tsconfig.json');
 const lessCompiler = (dist) =>
 function compileLess() {
     return gulp
-      .src(`${src}/**/*.less`)
-      .pipe(less())
+      .src([`${src}/**/*.less`, `${src}/**/ui.wxss`])
+      .pipe(gulpif( function (file) {
+          if(file.extname === '.less'){
+              return true
+          }
+          return false
+      }, less()))
       .pipe(postcss())
       .pipe(insert.transform((contents, file) => {
         if (!file.path.includes('packages' + path.sep + 'common')) {
@@ -46,7 +52,7 @@ const staticCopier = (dist) =>
     gulp.parallel(
         copier(dist, 'wxml'),
         copier(dist, 'wxs'),
-        copier(dist, 'json')
+        copier(dist, 'json'),
     );
 const cleaner = (path) =>
     function clean() {

@@ -55,6 +55,11 @@ WcyComponent({
    * 组件的方法列表
    */
   methods: {
+   onTap: function(e){
+      let index = e.target.dataset.index;
+      let item = this.data.linkDatas[index];
+      this.triggerEvent('ontap', item);
+    },
     updateView(){//更新视图事件
       let newArray = [...this.data.linkDatas];
       // @ts-ignore
@@ -71,7 +76,7 @@ WcyComponent({
         ret.forEach((ele, ii) => {
           let id = ele.dataset.item;
           let height = ele.height
-          let span = Math.ceil(height / 10)  // 20 = grid-auto-row
+          let span = Math.ceil(height / 1)  // 20 = grid-auto-row
           //  styleStr += `--item-span-${sii}: auto / span ${span};`
           let curItem = this.data.linkDatas.filter(e => e[this.data.key] == id);
           if (curItem[0]["gridstyle"]) return;

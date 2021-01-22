@@ -94,6 +94,7 @@ OK，l-demo组件封装好以后，接下来就可以渲染瀑布流了。
 | 事件名 | 说明 | 参数 |
 | --- | --- | --- |
 | updatedata |一轮flowWater渲染完成事件| item |
+| onTap |item点击事件| item |
 
 
 
